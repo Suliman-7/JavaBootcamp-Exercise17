@@ -96,6 +96,10 @@ public class UserService {
             purchasedList.setPrice(p1.getPrice());
             purchasedList.setCategoryID(p1.getCategoryID());
             purchasedListRepository.save(purchasedList);
+            userRepository.save(user);
+            merchantStockRepository.save(ms);
+            
+
 
                 return "Buy Success";
                 }
@@ -138,6 +142,8 @@ public class UserService {
                 merchantStockRepository.getById(mid).setStock(merchantStockRepository.getById(mid).getStock() + 1);
                 userRepository.getById(uid).setBalance(userRepository.getById(uid).getBalance() + productRepository.getById(pid).getPrice());
                 purchasedListRepository.delete(purchasedListRepository.getById(pid));
+                merchantStockRepository.save(ms);
+                userRepository.save(user);
 
 
                 return "Return Success";
@@ -197,6 +203,7 @@ public class UserService {
         shoppingCart.setPrice(p1.getPrice());
         shoppingCart.setCategoryID(p1.getCategoryID());
         shoppingCartRepository.save(shoppingCart);
+        userRepository.save(user);
 
         return "Product Added to cart successfully";
     }
@@ -252,6 +259,8 @@ public class UserService {
             purchasedList.setPrice(sh.getPrice());
             purchasedList.setCategoryID(sh.getCategoryID());
             purchasedListRepository.save(purchasedList);
+            userRepository.save(user);
+            merchantStockRepository.save(merchantStockRepository.getById(sh.getId()));
 
 
         }
